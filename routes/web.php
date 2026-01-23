@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemTypeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('item-types', ItemTypeController::class)->except(['show']);
+    Route::resource('items', ItemController::class)->except(['show']);
 });
 
 require __DIR__.'/settings.php';
