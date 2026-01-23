@@ -13,9 +13,10 @@ import {
 import { dashboard } from '@/routes';
 import { index as itemTypesIndex } from '@/actions/App/Http/Controllers/ItemTypeController';
 import { index as itemsIndex } from '@/actions/App/Http/Controllers/ItemController';
+import { index as customersIndex } from '@/actions/App/Http/Controllers/CustomerController';
 import type { NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Package, Box } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Package, Box, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -33,6 +34,11 @@ const mainNavItems: NavItem[] = [
         title: 'Itens',
         href: itemsIndex(),
         icon: Box,
+    },
+    {
+        title: 'Clientes',
+        href: customersIndex(),
+        icon: Users,
     },
 ];
 
