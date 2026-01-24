@@ -190,3 +190,20 @@ test('rental belongs to item', function () {
 
     expect($rental->item->id)->toBe($item->id);
 });
+
+test('can mark rental as returned', function () {
+    $customer = Customer::factory()->create();
+    $item = Item::factory()->create();
+    $rental = Rental::factory()->for($customer)->for($item)->create([
+        'returned_at' => null,
+    ]);
+
+    expect($rental->returned_at)->toBeNull();
+
+    $this->patch(route('rentals.return', $rental))
+        ->assertRedirect(route('rentals.index'));
+
+    $rental->refresh();
+
+    expect($rental->returned_at)->not->toBeNull();
+});

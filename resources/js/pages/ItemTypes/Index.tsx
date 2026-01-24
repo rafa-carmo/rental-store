@@ -1,6 +1,8 @@
-import { Head, Link, router } from '@inertiajs/react';
-import { Edit, Plus, Trash2 } from 'lucide-react';
-import { create, destroy, edit } from '@/actions/App/Http/Controllers/ItemTypeController';
+import {
+    create,
+    destroy,
+    edit,
+} from '@/actions/App/Http/Controllers/ItemTypeController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -9,9 +11,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
 import {
     Table,
     TableBody,
@@ -20,6 +19,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import type { BreadcrumbItem } from '@/types';
+import { Head, Link, router } from '@inertiajs/react';
+import { Edit, Plus, Trash2 } from 'lucide-react';
 
 type ItemType = {
     id: number;
@@ -61,7 +65,8 @@ export default function Index({ itemTypes }: Props) {
                         <div>
                             <CardTitle>Tipos de Itens</CardTitle>
                             <CardDescription>
-                                Gerencie os tipos de itens disponíveis para locação
+                                Gerencie os tipos de itens disponíveis para
+                                locação
                             </CardDescription>
                         </div>
                         <Button asChild>
@@ -77,8 +82,12 @@ export default function Index({ itemTypes }: Props) {
                                 <TableRow>
                                     <TableHead>Nome</TableHead>
                                     <TableHead>Descrição</TableHead>
-                                    <TableHead className="w-[100px]">Status</TableHead>
-                                    <TableHead className="w-[100px] text-right">Ações</TableHead>
+                                    <TableHead className="w-[100px]">
+                                        Status
+                                    </TableHead>
+                                    <TableHead className="w-[100px] text-right">
+                                        Ações
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -108,7 +117,9 @@ export default function Index({ itemTypes }: Props) {
                                                             : 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400'
                                                     }`}
                                                 >
-                                                    {itemType.is_active ? 'Ativo' : 'Inativo'}
+                                                    {itemType.is_active
+                                                        ? 'Ativo'
+                                                        : 'Inativo'}
                                                 </span>
                                             </TableCell>
                                             <TableCell className="text-right">
@@ -118,14 +129,22 @@ export default function Index({ itemTypes }: Props) {
                                                         size="icon"
                                                         asChild
                                                     >
-                                                        <Link href={edit.url(itemType.id)}>
+                                                        <Link
+                                                            href={edit.url(
+                                                                itemType.id,
+                                                            )}
+                                                        >
                                                             <Edit className="h-4 w-4" />
                                                         </Link>
                                                     </Button>
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
-                                                        onClick={() => handleDelete(itemType.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                itemType.id,
+                                                            )
+                                                        }
                                                     >
                                                         <Trash2 className="h-4 w-4" />
                                                     </Button>

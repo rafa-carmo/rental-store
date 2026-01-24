@@ -1,6 +1,7 @@
-import { Form, Head, Link } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
-import { index, store } from '@/actions/App/Http/Controllers/ItemTypeController';
+import {
+    index,
+    store,
+} from '@/actions/App/Http/Controllers/ItemTypeController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -11,12 +12,12 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
-
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -74,7 +75,9 @@ export default function Create() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="description">Descrição</Label>
+                                        <Label htmlFor="description">
+                                            Descrição
+                                        </Label>
                                         <Textarea
                                             id="description"
                                             name="description"
@@ -96,10 +99,17 @@ export default function Create() {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

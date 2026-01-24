@@ -17,6 +17,7 @@ class Rental extends Model
         'value',
         'pickup_date',
         'return_date',
+        'returned_at',
     ];
 
     protected function casts(): array
@@ -25,6 +26,7 @@ class Rental extends Model
             'value' => 'decimal:2',
             'pickup_date' => 'date',
             'return_date' => 'date',
+            'returned_at' => 'datetime',
         ];
     }
 

@@ -1,6 +1,7 @@
-import { Form, Head, Link } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
-import { index, update } from '@/actions/App/Http/Controllers/CustomerController';
+import {
+    index,
+    update,
+} from '@/actions/App/Http/Controllers/CustomerController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -14,6 +15,8 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 type Customer = {
     id: number;
@@ -73,10 +76,14 @@ export default function Edit({ customer }: Props) {
                             {({ errors, processing }) => (
                                 <div className="space-y-6">
                                     <div className="space-y-4">
-                                        <h3 className="text-lg font-medium">Informações Básicas</h3>
+                                        <h3 className="text-lg font-medium">
+                                            Informações Básicas
+                                        </h3>
                                         <div className="grid gap-4 md:grid-cols-2">
                                             <div className="space-y-2 md:col-span-2">
-                                                <Label htmlFor="name">Nome *</Label>
+                                                <Label htmlFor="name">
+                                                    Nome *
+                                                </Label>
                                                 <Input
                                                     id="name"
                                                     name="name"
@@ -92,12 +99,16 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="phone">Telefone</Label>
+                                                <Label htmlFor="phone">
+                                                    Telefone
+                                                </Label>
                                                 <Input
                                                     id="phone"
                                                     name="phone"
                                                     placeholder="(00) 00000-0000"
-                                                    defaultValue={customer.phone || ''}
+                                                    defaultValue={
+                                                        customer.phone || ''
+                                                    }
                                                 />
                                                 {errors.phone && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -107,13 +118,17 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="email">Email</Label>
+                                                <Label htmlFor="email">
+                                                    Email
+                                                </Label>
                                                 <Input
                                                     id="email"
                                                     name="email"
                                                     type="email"
                                                     placeholder="exemplo@email.com"
-                                                    defaultValue={customer.email || ''}
+                                                    defaultValue={
+                                                        customer.email || ''
+                                                    }
                                                 />
                                                 {errors.email && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -125,7 +140,9 @@ export default function Edit({ customer }: Props) {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-lg font-medium">Endereço (Opcional)</h3>
+                                        <h3 className="text-lg font-medium">
+                                            Endereço (Opcional)
+                                        </h3>
                                         <div className="grid gap-4 md:grid-cols-6">
                                             <div className="space-y-2 md:col-span-2">
                                                 <Label htmlFor="cep">CEP</Label>
@@ -133,7 +150,9 @@ export default function Edit({ customer }: Props) {
                                                     id="cep"
                                                     name="cep"
                                                     placeholder="00000-000"
-                                                    defaultValue={customer.cep || ''}
+                                                    defaultValue={
+                                                        customer.cep || ''
+                                                    }
                                                 />
                                                 {errors.cep && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -143,12 +162,16 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-4">
-                                                <Label htmlFor="street">Logradouro</Label>
+                                                <Label htmlFor="street">
+                                                    Logradouro
+                                                </Label>
                                                 <Input
                                                     id="street"
                                                     name="street"
                                                     placeholder="Rua, Avenida, etc."
-                                                    defaultValue={customer.street || ''}
+                                                    defaultValue={
+                                                        customer.street || ''
+                                                    }
                                                 />
                                                 {errors.street && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -158,12 +181,16 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-2">
-                                                <Label htmlFor="number">Número</Label>
+                                                <Label htmlFor="number">
+                                                    Número
+                                                </Label>
                                                 <Input
                                                     id="number"
                                                     name="number"
                                                     placeholder="123"
-                                                    defaultValue={customer.number || ''}
+                                                    defaultValue={
+                                                        customer.number || ''
+                                                    }
                                                 />
                                                 {errors.number && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -173,12 +200,17 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-4">
-                                                <Label htmlFor="complement">Complemento</Label>
+                                                <Label htmlFor="complement">
+                                                    Complemento
+                                                </Label>
                                                 <Input
                                                     id="complement"
                                                     name="complement"
                                                     placeholder="Apartamento, sala, etc."
-                                                    defaultValue={customer.complement || ''}
+                                                    defaultValue={
+                                                        customer.complement ||
+                                                        ''
+                                                    }
                                                 />
                                                 {errors.complement && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -188,12 +220,16 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-4">
-                                                <Label htmlFor="city">Município</Label>
+                                                <Label htmlFor="city">
+                                                    Município
+                                                </Label>
                                                 <Input
                                                     id="city"
                                                     name="city"
                                                     placeholder="Nome da cidade"
-                                                    defaultValue={customer.city || ''}
+                                                    defaultValue={
+                                                        customer.city || ''
+                                                    }
                                                 />
                                                 {errors.city && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -203,13 +239,17 @@ export default function Edit({ customer }: Props) {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-2">
-                                                <Label htmlFor="state">Estado</Label>
+                                                <Label htmlFor="state">
+                                                    Estado
+                                                </Label>
                                                 <Input
                                                     id="state"
                                                     name="state"
                                                     placeholder="UF"
                                                     maxLength={2}
-                                                    defaultValue={customer.state || ''}
+                                                    defaultValue={
+                                                        customer.state || ''
+                                                    }
                                                 />
                                                 {errors.state && (
                                                     <p className="text-sm text-red-600 dark:text-red-400">
@@ -222,10 +262,17 @@ export default function Edit({ customer }: Props) {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

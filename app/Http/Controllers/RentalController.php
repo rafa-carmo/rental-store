@@ -89,4 +89,15 @@ class RentalController extends Controller
         return redirect()->route('rentals.index')
             ->with('success', 'Aluguel excluído com sucesso!');
     }
+
+    /**
+     * Mark rental as returned.
+     */
+    public function markAsReturned(Rental $rental): RedirectResponse
+    {
+        $rental->update(['returned_at' => now()]);
+
+        return redirect()->route('rentals.index')
+            ->with('success', 'Devolução registrada com sucesso!');
+    }
 }

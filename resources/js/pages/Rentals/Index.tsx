@@ -1,6 +1,9 @@
-import { Head, Link, router } from '@inertiajs/react';
-import { Edit, Plus, Trash2 } from 'lucide-react';
-import { create, destroy, edit } from '@/actions/App/Http/Controllers/RentalController';
+import {
+    create,
+    destroy,
+    edit,
+} from '@/actions/App/Http/Controllers/RentalController';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -9,9 +12,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
 import {
     Table,
     TableBody,
@@ -20,6 +20,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import type { BreadcrumbItem } from '@/types';
+import { Head, Link, router } from '@inertiajs/react';
+import { CheckCircle, Edit, Plus, Trash2 } from 'lucide-react';
 
 type Rental = {
     id: number;
@@ -28,6 +33,7 @@ type Rental = {
     value: string;
     pickup_date: string;
     return_date: string;
+    returned_at: string | null;
     customer: {
         id: number;
         name: string;
@@ -62,6 +68,12 @@ export default function Index({ rentals }: Props) {
         }
     };
 
+    const handleMarkAsReturned = (id: number) => {
+        if (confirm('Confirmar devolução do item?')) {
+            router.patch(route('rentals.return', id));
+        }
+    };
+
     const formatCurrency = (value: string) => {
         return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
@@ -71,6 +83,10 @@ export default function Index({ rentals }: Props) {
 
     const formatDate = (date: string) => {
         return new Date(date + 'T00:00:00').toLocaleDateString('pt-BR');
+    };
+
+    const formatDateTime = (date: string) => {
+        return new Date(date).toLocaleString('pt-BR');
     };
 
     return (
@@ -101,7 +117,8 @@ export default function Index({ rentals }: Props) {
                                     <TableHead>Valor</TableHead>
                                     <TableHead>Data Retirada</TableHead>
                                     <TableHead>Data Entrega</TableHead>
-                                    <TableHead className="w-[100px] text-right">
+                                    <TableHead>Status</TableHead>
+                                    <TableHead className="w-[150px] text-right">
                                         Ações
                                     </TableHead>
                                 </TableRow>
@@ -110,7 +127,7 @@ export default function Index({ rentals }: Props) {
                                 {rentals.length === 0 ? (
                                     <TableRow>
                                         <TableCell
-                                            colSpan={6}
+                                            colSpan={7}
                                             className="text-center text-muted-foreground"
                                         >
                                             Nenhum aluguel cadastrado
@@ -122,7 +139,9 @@ export default function Index({ rentals }: Props) {
                                             <TableCell className="font-medium">
                                                 {rental.customer.name}
                                             </TableCell>
-                                            <TableCell>{rental.item.name}</TableCell>
+                                            <TableCell>
+                                                {rental.item.name}
+                                            </TableCell>
                                             <TableCell>
                                                 {formatCurrency(rental.value)}
                                             </TableCell>
@@ -132,14 +151,43 @@ export default function Index({ rentals }: Props) {
                                             <TableCell>
                                                 {formatDate(rental.return_date)}
                                             </TableCell>
+                                            <TableCell>
+                                                {rental.returned_at ? (
+                                                    <Badge variant="success">
+                                                        Devolvido
+                                                    </Badge>
+                                                ) : (
+                                                    <Badge variant="warning">
+                                                        Pendente
+                                                    </Badge>
+                                                )}
+                                            </TableCell>
                                             <TableCell className="text-right">
                                                 <div className="flex justify-end gap-2">
+                                                    {!rental.returned_at && (
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="icon"
+                                                            onClick={() =>
+                                                                handleMarkAsReturned(
+                                                                    rental.id,
+                                                                )
+                                                            }
+                                                            title="Registrar Devolução"
+                                                        >
+                                                            <CheckCircle className="h-4 w-4" />
+                                                        </Button>
+                                                    )}
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
                                                         asChild
                                                     >
-                                                        <Link href={edit.url(rental.id)}>
+                                                        <Link
+                                                            href={edit.url(
+                                                                rental.id,
+                                                            )}
+                                                        >
                                                             <Edit className="h-4 w-4" />
                                                         </Link>
                                                     </Button>
@@ -147,7 +195,9 @@ export default function Index({ rentals }: Props) {
                                                         variant="ghost"
                                                         size="icon"
                                                         onClick={() =>
-                                                            handleDelete(rental.id)
+                                                            handleDelete(
+                                                                rental.id,
+                                                            )
                                                         }
                                                     >
                                                         <Trash2 className="h-4 w-4" />

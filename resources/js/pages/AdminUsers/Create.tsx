@@ -1,6 +1,7 @@
-import { Form, Head, Link } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
-import { index, store } from '@/actions/App/Http/Controllers/AdminUserController';
+import {
+    index,
+    store,
+} from '@/actions/App/Http/Controllers/AdminUserController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -21,6 +22,8 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -94,7 +97,9 @@ export default function Create() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="password">Senha *</Label>
+                                        <Label htmlFor="password">
+                                            Senha *
+                                        </Label>
                                         <Input
                                             id="password"
                                             name="password"
@@ -123,7 +128,9 @@ export default function Create() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="role">Permissão *</Label>
+                                        <Label htmlFor="role">
+                                            Permissão *
+                                        </Label>
                                         <Select
                                             name="role"
                                             value={data.role}
@@ -153,10 +160,17 @@ export default function Create() {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

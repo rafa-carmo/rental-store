@@ -1,7 +1,7 @@
-import { Head, Link } from '@inertiajs/react';
-import { Form } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
-import { index, update } from '@/actions/App/Http/Controllers/ItemTypeController';
+import {
+    index,
+    update,
+} from '@/actions/App/Http/Controllers/ItemTypeController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -12,11 +12,13 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 type ItemType = {
     id: number;
@@ -88,11 +90,15 @@ export default function Edit({ itemType }: Props) {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="description">Descrição</Label>
+                                        <Label htmlFor="description">
+                                            Descrição
+                                        </Label>
                                         <Textarea
                                             id="description"
                                             name="description"
-                                            defaultValue={itemType.description || ''}
+                                            defaultValue={
+                                                itemType.description || ''
+                                            }
                                             placeholder="Digite uma descrição (opcional)"
                                             rows={4}
                                         />
@@ -105,9 +111,12 @@ export default function Edit({ itemType }: Props) {
 
                                     <div className="flex items-center justify-between rounded-lg border p-4">
                                         <div className="space-y-0.5">
-                                            <Label htmlFor="is_active">Status</Label>
+                                            <Label htmlFor="is_active">
+                                                Status
+                                            </Label>
                                             <p className="text-sm text-muted-foreground">
-                                                Define se o tipo está ativo ou inativo
+                                                Define se o tipo está ativo ou
+                                                inativo
                                             </p>
                                         </div>
                                         <Switch
@@ -124,10 +133,17 @@ export default function Edit({ itemType }: Props) {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Atualizar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Atualizar'}
                                         </Button>
                                     </div>
                                 </div>

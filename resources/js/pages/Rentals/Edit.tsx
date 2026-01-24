@@ -1,5 +1,3 @@
-import { Form, Head, Link } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
 import { index, update } from '@/actions/App/Http/Controllers/RentalController';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,9 +9,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
 import {
     Select,
     SelectContent,
@@ -21,6 +16,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import type { BreadcrumbItem } from '@/types';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 type Customer = {
     id: number;
@@ -90,7 +90,9 @@ export default function Edit({ rental, customers, items }: Props) {
                             {({ errors, processing, data, setData }) => (
                                 <div className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="customer_id">Cliente *</Label>
+                                        <Label htmlFor="customer_id">
+                                            Cliente *
+                                        </Label>
                                         <Select
                                             name="customer_id"
                                             value={
@@ -98,7 +100,10 @@ export default function Edit({ rental, customers, items }: Props) {
                                                 rental.customer_id.toString()
                                             }
                                             onValueChange={(value) =>
-                                                setData('customer_id', parseInt(value))
+                                                setData(
+                                                    'customer_id',
+                                                    parseInt(value),
+                                                )
                                             }
                                             required
                                         >
@@ -132,7 +137,10 @@ export default function Edit({ rental, customers, items }: Props) {
                                                 rental.item_id.toString()
                                             }
                                             onValueChange={(value) =>
-                                                setData('item_id', parseInt(value))
+                                                setData(
+                                                    'item_id',
+                                                    parseInt(value),
+                                                )
                                             }
                                             required
                                         >
@@ -185,7 +193,9 @@ export default function Edit({ rental, customers, items }: Props) {
                                                 id="pickup_date"
                                                 name="pickup_date"
                                                 type="date"
-                                                defaultValue={rental.pickup_date}
+                                                defaultValue={
+                                                    rental.pickup_date
+                                                }
                                                 required
                                             />
                                             {errors.pickup_date && (
@@ -203,7 +213,9 @@ export default function Edit({ rental, customers, items }: Props) {
                                                 id="return_date"
                                                 name="return_date"
                                                 type="date"
-                                                defaultValue={rental.return_date}
+                                                defaultValue={
+                                                    rental.return_date
+                                                }
                                                 required
                                             />
                                             {errors.return_date && (
@@ -216,10 +228,17 @@ export default function Edit({ rental, customers, items }: Props) {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

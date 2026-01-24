@@ -1,5 +1,3 @@
-import { Form, Head, Link } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
 import { index, store } from '@/actions/App/Http/Controllers/RentalController';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +19,8 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 type Customer = {
     id: number;
@@ -78,12 +78,10 @@ export default function Create({ customers, items }: Props) {
                             {({ errors, processing }) => (
                                 <div className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="customer_id">Cliente *</Label>
-                                        <Select
-                                            name="customer_id"
-
-                                            required
-                                        >
+                                        <Label htmlFor="customer_id">
+                                            Cliente *
+                                        </Label>
+                                        <Select name="customer_id" required>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Selecione um cliente" />
                                             </SelectTrigger>
@@ -107,11 +105,7 @@ export default function Create({ customers, items }: Props) {
 
                                     <div className="space-y-2">
                                         <Label htmlFor="item_id">Item *</Label>
-                                        <Select
-                                            name="item_id"
-
-                                            required
-                                        >
+                                        <Select name="item_id" required>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Selecione um item" />
                                             </SelectTrigger>
@@ -189,10 +183,17 @@ export default function Create({ customers, items }: Props) {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

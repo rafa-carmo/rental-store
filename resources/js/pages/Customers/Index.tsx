@@ -1,6 +1,8 @@
-import { Head, Link, router } from '@inertiajs/react';
-import { Edit, Plus, Trash2 } from 'lucide-react';
-import { create, destroy, edit } from '@/actions/App/Http/Controllers/CustomerController';
+import {
+    create,
+    destroy,
+    edit,
+} from '@/actions/App/Http/Controllers/CustomerController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -9,9 +11,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
 import {
     Table,
     TableBody,
@@ -20,6 +19,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import type { BreadcrumbItem } from '@/types';
+import { Head, Link, router } from '@inertiajs/react';
+import { Edit, Plus, Trash2 } from 'lucide-react';
 
 type Customer = {
     id: number;
@@ -85,7 +89,9 @@ export default function Index({ customers }: Props) {
                                     <TableHead>Telefone</TableHead>
                                     <TableHead>Email</TableHead>
                                     <TableHead>Cidade/Estado</TableHead>
-                                    <TableHead className="w-[100px] text-right">Ações</TableHead>
+                                    <TableHead className="w-[100px] text-right">
+                                        Ações
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -113,7 +119,9 @@ export default function Index({ customers }: Props) {
                                             <TableCell>
                                                 {customer.city && customer.state
                                                     ? `${customer.city}/${customer.state}`
-                                                    : customer.city || customer.state || '-'}
+                                                    : customer.city ||
+                                                      customer.state ||
+                                                      '-'}
                                             </TableCell>
                                             <TableCell className="text-right">
                                                 <div className="flex justify-end gap-2">
@@ -122,14 +130,22 @@ export default function Index({ customers }: Props) {
                                                         size="icon"
                                                         asChild
                                                     >
-                                                        <Link href={edit.url(customer.id)}>
+                                                        <Link
+                                                            href={edit.url(
+                                                                customer.id,
+                                                            )}
+                                                        >
                                                             <Edit className="h-4 w-4" />
                                                         </Link>
                                                     </Button>
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
-                                                        onClick={() => handleDelete(customer.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                customer.id,
+                                                            )
+                                                        }
                                                     >
                                                         <Trash2 className="h-4 w-4" />
                                                     </Button>

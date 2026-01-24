@@ -1,6 +1,7 @@
-import { Form, Head, Link } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
-import { index, store } from '@/actions/App/Http/Controllers/CustomerController';
+import {
+    index,
+    store,
+} from '@/actions/App/Http/Controllers/CustomerController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -14,6 +15,8 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -56,10 +59,14 @@ export default function Create() {
                             {({ errors, processing }) => (
                                 <div className="space-y-6">
                                     <div className="space-y-4">
-                                        <h3 className="text-lg font-medium">Informações Básicas</h3>
+                                        <h3 className="text-lg font-medium">
+                                            Informações Básicas
+                                        </h3>
                                         <div className="grid gap-4 md:grid-cols-2">
                                             <div className="space-y-2 md:col-span-2">
-                                                <Label htmlFor="name">Nome *</Label>
+                                                <Label htmlFor="name">
+                                                    Nome *
+                                                </Label>
                                                 <Input
                                                     id="name"
                                                     name="name"
@@ -74,7 +81,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="phone">Telefone</Label>
+                                                <Label htmlFor="phone">
+                                                    Telefone
+                                                </Label>
                                                 <Input
                                                     id="phone"
                                                     name="phone"
@@ -88,7 +97,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label htmlFor="email">Email</Label>
+                                                <Label htmlFor="email">
+                                                    Email
+                                                </Label>
                                                 <Input
                                                     id="email"
                                                     name="email"
@@ -105,7 +116,9 @@ export default function Create() {
                                     </div>
 
                                     <div className="space-y-4">
-                                        <h3 className="text-lg font-medium">Endereço (Opcional)</h3>
+                                        <h3 className="text-lg font-medium">
+                                            Endereço (Opcional)
+                                        </h3>
                                         <div className="grid gap-4 md:grid-cols-6">
                                             <div className="space-y-2 md:col-span-2">
                                                 <Label htmlFor="cep">CEP</Label>
@@ -122,7 +135,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-4">
-                                                <Label htmlFor="street">Logradouro</Label>
+                                                <Label htmlFor="street">
+                                                    Logradouro
+                                                </Label>
                                                 <Input
                                                     id="street"
                                                     name="street"
@@ -136,7 +151,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-2">
-                                                <Label htmlFor="number">Número</Label>
+                                                <Label htmlFor="number">
+                                                    Número
+                                                </Label>
                                                 <Input
                                                     id="number"
                                                     name="number"
@@ -150,7 +167,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-4">
-                                                <Label htmlFor="complement">Complemento</Label>
+                                                <Label htmlFor="complement">
+                                                    Complemento
+                                                </Label>
                                                 <Input
                                                     id="complement"
                                                     name="complement"
@@ -164,7 +183,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-4">
-                                                <Label htmlFor="city">Município</Label>
+                                                <Label htmlFor="city">
+                                                    Município
+                                                </Label>
                                                 <Input
                                                     id="city"
                                                     name="city"
@@ -178,7 +199,9 @@ export default function Create() {
                                             </div>
 
                                             <div className="space-y-2 md:col-span-2">
-                                                <Label htmlFor="state">Estado</Label>
+                                                <Label htmlFor="state">
+                                                    Estado
+                                                </Label>
                                                 <Input
                                                     id="state"
                                                     name="state"
@@ -196,10 +219,17 @@ export default function Create() {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

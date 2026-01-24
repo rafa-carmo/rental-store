@@ -1,6 +1,3 @@
-import { Head, Link } from '@inertiajs/react';
-import { Form } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
 import { index, update } from '@/actions/App/Http/Controllers/ItemController';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,10 +16,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import { Textarea } from '@/components/ui/textarea';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 type ItemType = {
     id: number;
@@ -105,11 +104,15 @@ export default function Edit({ item, itemTypes }: Props) {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="description">Descrição</Label>
+                                        <Label htmlFor="description">
+                                            Descrição
+                                        </Label>
                                         <Textarea
                                             id="description"
                                             name="description"
-                                            defaultValue={item.description || ''}
+                                            defaultValue={
+                                                item.description || ''
+                                            }
                                             placeholder="Digite uma descrição (opcional)"
                                             rows={4}
                                         />
@@ -135,7 +138,9 @@ export default function Edit({ item, itemTypes }: Props) {
 
                                     <div className="space-y-2">
                                         <Label htmlFor="image">
-                                            {item.image ? 'Nova Imagem' : 'Imagem'}
+                                            {item.image
+                                                ? 'Nova Imagem'
+                                                : 'Imagem'}
                                         </Label>
                                         <Input
                                             id="image"
@@ -154,7 +159,9 @@ export default function Edit({ item, itemTypes }: Props) {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="item_type_id">Tipo de Item *</Label>
+                                        <Label htmlFor="item_type_id">
+                                            Tipo de Item *
+                                        </Label>
                                         <Select
                                             name="item_type_id"
                                             defaultValue={item.item_type_id.toString()}
@@ -195,7 +202,9 @@ export default function Edit({ item, itemTypes }: Props) {
                                                 <SelectItem value="disponivel">
                                                     Disponível
                                                 </SelectItem>
-                                                <SelectItem value="alugado">Alugado</SelectItem>
+                                                <SelectItem value="alugado">
+                                                    Alugado
+                                                </SelectItem>
                                                 <SelectItem value="indisponivel">
                                                     Indisponível
                                                 </SelectItem>
@@ -210,10 +219,17 @@ export default function Edit({ item, itemTypes }: Props) {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Atualizar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Atualizar'}
                                         </Button>
                                     </div>
                                 </div>

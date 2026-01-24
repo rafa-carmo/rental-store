@@ -1,6 +1,8 @@
-import { Head, Link, router } from '@inertiajs/react';
-import { Edit, Plus, Trash2 } from 'lucide-react';
-import { create, destroy, edit } from '@/actions/App/Http/Controllers/ItemController';
+import {
+    create,
+    destroy,
+    edit,
+} from '@/actions/App/Http/Controllers/ItemController';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -9,9 +11,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
 import {
     Table,
     TableBody,
@@ -20,6 +19,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import type { BreadcrumbItem } from '@/types';
+import { Head, Link, router } from '@inertiajs/react';
+import { Edit, Plus, Trash2 } from 'lucide-react';
 
 type ItemType = {
     id: number;
@@ -58,15 +62,18 @@ const breadcrumbs: BreadcrumbItem[] = [
 const statusConfig = {
     disponivel: {
         label: 'Disponível',
-        className: 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400',
+        className:
+            'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400',
     },
     alugado: {
         label: 'Alugado',
-        className: 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400',
+        className:
+            'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400',
     },
     indisponivel: {
         label: 'Indisponível',
-        className: 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400',
+        className:
+            'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400',
     },
 };
 
@@ -103,8 +110,12 @@ export default function Index({ items }: Props) {
                                     <TableHead>Nome</TableHead>
                                     <TableHead>Tipo</TableHead>
                                     <TableHead>Descrição</TableHead>
-                                    <TableHead className="w-[120px]">Status</TableHead>
-                                    <TableHead className="w-[100px] text-right">Ações</TableHead>
+                                    <TableHead className="w-[120px]">
+                                        Status
+                                    </TableHead>
+                                    <TableHead className="w-[100px] text-right">
+                                        Ações
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -133,7 +144,11 @@ export default function Index({ items }: Props) {
                                                 <span
                                                     className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${statusConfig[item.status].className}`}
                                                 >
-                                                    {statusConfig[item.status].label}
+                                                    {
+                                                        statusConfig[
+                                                            item.status
+                                                        ].label
+                                                    }
                                                 </span>
                                             </TableCell>
                                             <TableCell className="text-right">
@@ -143,14 +158,22 @@ export default function Index({ items }: Props) {
                                                         size="icon"
                                                         asChild
                                                     >
-                                                        <Link href={edit.url(item.id)}>
+                                                        <Link
+                                                            href={edit.url(
+                                                                item.id,
+                                                            )}
+                                                        >
                                                             <Edit className="h-4 w-4" />
                                                         </Link>
                                                     </Button>
                                                     <Button
                                                         variant="ghost"
                                                         size="icon"
-                                                        onClick={() => handleDelete(item.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                item.id,
+                                                            )
+                                                        }
                                                     >
                                                         <Trash2 className="h-4 w-4" />
                                                     </Button>

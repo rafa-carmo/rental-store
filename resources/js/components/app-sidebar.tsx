@@ -1,3 +1,8 @@
+import { index as adminUsersIndex } from '@/actions/App/Http/Controllers/AdminUserController';
+import { index as customersIndex } from '@/actions/App/Http/Controllers/CustomerController';
+import { index as itemsIndex } from '@/actions/App/Http/Controllers/ItemController';
+import { index as itemTypesIndex } from '@/actions/App/Http/Controllers/ItemTypeController';
+import { index as rentalsIndex } from '@/actions/App/Http/Controllers/RentalController';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -11,14 +16,18 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { index as itemTypesIndex } from '@/actions/App/Http/Controllers/ItemTypeController';
-import { index as itemsIndex } from '@/actions/App/Http/Controllers/ItemController';
-import { index as customersIndex } from '@/actions/App/Http/Controllers/CustomerController';
-import { index as adminUsersIndex } from '@/actions/App/Http/Controllers/AdminUserController';
-import { index as rentalsIndex } from '@/actions/App/Http/Controllers/RentalController';
 import type { NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Package, Box, Users, UserCog, FileText } from 'lucide-react';
+import {
+    BookOpen,
+    Box,
+    FileText,
+    Folder,
+    LayoutGrid,
+    Package,
+    UserCog,
+    Users,
+} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [

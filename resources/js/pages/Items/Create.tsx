@@ -1,6 +1,3 @@
-import { Head, Link } from '@inertiajs/react';
-import { Form } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
 import { index, store } from '@/actions/App/Http/Controllers/ItemController';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,10 +16,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import { Textarea } from '@/components/ui/textarea';
+import { Form, Head, Link } from '@inertiajs/react';
+import { ArrowLeft } from 'lucide-react';
 
 type ItemType = {
     id: number;
@@ -91,7 +90,9 @@ export default function Create({ itemTypes }: Props) {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="description">Descrição</Label>
+                                        <Label htmlFor="description">
+                                            Descrição
+                                        </Label>
                                         <Textarea
                                             id="description"
                                             name="description"
@@ -124,7 +125,9 @@ export default function Create({ itemTypes }: Props) {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label htmlFor="item_type_id">Tipo de Item *</Label>
+                                        <Label htmlFor="item_type_id">
+                                            Tipo de Item *
+                                        </Label>
                                         <Select name="item_type_id" required>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Selecione o tipo" />
@@ -149,7 +152,11 @@ export default function Create({ itemTypes }: Props) {
 
                                     <div className="space-y-2">
                                         <Label htmlFor="status">Status *</Label>
-                                        <Select name="status" defaultValue="disponivel" required>
+                                        <Select
+                                            name="status"
+                                            defaultValue="disponivel"
+                                            required
+                                        >
                                             <SelectTrigger>
                                                 <SelectValue />
                                             </SelectTrigger>
@@ -157,7 +164,9 @@ export default function Create({ itemTypes }: Props) {
                                                 <SelectItem value="disponivel">
                                                     Disponível
                                                 </SelectItem>
-                                                <SelectItem value="alugado">Alugado</SelectItem>
+                                                <SelectItem value="alugado">
+                                                    Alugado
+                                                </SelectItem>
                                                 <SelectItem value="indisponivel">
                                                     Indisponível
                                                 </SelectItem>
@@ -172,10 +181,17 @@ export default function Create({ itemTypes }: Props) {
 
                                     <div className="flex justify-end gap-4">
                                         <Button variant="outline" asChild>
-                                            <Link href={index().url}>Cancelar</Link>
+                                            <Link href={index().url}>
+                                                Cancelar
+                                            </Link>
                                         </Button>
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Salvando...' : 'Salvar'}
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            {processing
+                                                ? 'Salvando...'
+                                                : 'Salvar'}
                                         </Button>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemTypeController;
 use App\Http\Controllers\RentalController;
@@ -16,15 +17,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('item-types', ItemTypeController::class)->except(['show']);
     Route::resource('items', ItemController::class)->except(['show']);
     Route::resource('customers', CustomerController::class)->except(['show']);
     Route::resource('admin-users', AdminUserController::class)->except(['show']);
     Route::resource('rentals', RentalController::class)->except(['show']);
+    Route::patch('rentals/{rental}/return', [RentalController::class, 'markAsReturned'])->name('rentals.return');
 });
 
 require __DIR__.'/settings.php';
