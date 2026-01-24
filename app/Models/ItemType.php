@@ -22,4 +22,14 @@ class ItemType extends Model
             'is_active' => 'boolean',
         ];
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true)->orWhere('is_active', 'on');
+    }
 }

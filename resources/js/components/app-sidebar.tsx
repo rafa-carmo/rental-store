@@ -14,9 +14,11 @@ import { dashboard } from '@/routes';
 import { index as itemTypesIndex } from '@/actions/App/Http/Controllers/ItemTypeController';
 import { index as itemsIndex } from '@/actions/App/Http/Controllers/ItemController';
 import { index as customersIndex } from '@/actions/App/Http/Controllers/CustomerController';
+import { index as adminUsersIndex } from '@/actions/App/Http/Controllers/AdminUserController';
+import { index as rentalsIndex } from '@/actions/App/Http/Controllers/RentalController';
 import type { NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Package, Box, Users } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Package, Box, Users, UserCog, FileText } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -39,6 +41,16 @@ const mainNavItems: NavItem[] = [
         title: 'Clientes',
         href: customersIndex(),
         icon: Users,
+    },
+    {
+        title: 'Aluguéis',
+        href: rentalsIndex(),
+        icon: FileText,
+    },
+    {
+        title: 'Usuários',
+        href: adminUsersIndex(),
+        icon: UserCog,
     },
 ];
 

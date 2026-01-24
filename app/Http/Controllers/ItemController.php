@@ -34,7 +34,7 @@ class ItemController extends Controller
     public function create(): Response
     {
         $itemTypes = ItemType::query()
-            ->where('is_active', true)
+            ->active()
             ->orderBy('name')
             ->get();
 
