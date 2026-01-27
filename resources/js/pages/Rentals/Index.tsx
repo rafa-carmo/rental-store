@@ -1,8 +1,11 @@
+import { Head, Link, router } from '@inertiajs/react';
+import { CheckCircle, Edit, Plus, Trash2 } from 'lucide-react';
 import {
     create,
     destroy,
     edit,
 } from '@/actions/App/Http/Controllers/RentalController';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,6 +15,10 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import returnMethod from '@/routes/return';
+import type { BreadcrumbItem } from '@/types';
 import {
     Table,
     TableBody,
@@ -20,11 +27,6 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import type { BreadcrumbItem } from '@/types';
-import { Head, Link, router } from '@inertiajs/react';
-import { CheckCircle, Edit, Plus, Trash2 } from 'lucide-react';
 
 type Rental = {
     id: number;
@@ -70,7 +72,7 @@ export default function Index({ rentals }: Props) {
 
     const handleMarkAsReturned = (id: number) => {
         if (confirm('Confirmar devolução do item?')) {
-            router.patch(route('rentals.return', id));
+            console.log(router.patch(returnMethod.rental.url(id)));
         }
     };
 
@@ -146,10 +148,10 @@ export default function Index({ rentals }: Props) {
                                                 {formatCurrency(rental.value)}
                                             </TableCell>
                                             <TableCell>
-                                                {formatDate(rental.pickup_date)}
+                                                {formatDateTime(rental.pickup_date)}
                                             </TableCell>
                                             <TableCell>
-                                                {formatDate(rental.return_date)}
+                                                {formatDateTime(rental.return_date)}
                                             </TableCell>
                                             <TableCell>
                                                 {rental.returned_at ? (

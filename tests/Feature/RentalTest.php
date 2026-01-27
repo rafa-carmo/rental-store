@@ -200,7 +200,7 @@ test('can mark rental as returned', function () {
 
     expect($rental->returned_at)->toBeNull();
 
-    $this->patch(route('rentals.return', $rental))
+    $this->patch(route('return.rental', $rental))
         ->assertRedirect(route('rentals.index'));
 
     $rental->refresh();

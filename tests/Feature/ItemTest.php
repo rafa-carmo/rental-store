@@ -44,6 +44,8 @@ test('can store a new item', function () {
         'name' => 'Furadeira Elétrica',
         'description' => 'Furadeira de impacto 800W',
         'item_type_id' => $itemType->id,
+        'quantity_total' => 5,
+        'quantity_available' => 5,
         'status' => 'disponivel',
     ];
 
@@ -62,6 +64,8 @@ test('can store item with image', function () {
         'description' => 'Furadeira de impacto 800W',
         'image' => UploadedFile::fake()->image('furadeira.jpg'),
         'item_type_id' => $itemType->id,
+        'quantity_total' => 3,
+        'quantity_available' => 3,
         'status' => 'disponivel',
     ];
 
@@ -87,6 +91,8 @@ test('requires item_type_id when storing item', function () {
     $this->post(route('items.store'), [
         'name' => 'Test Item',
         'description' => 'Test description',
+        'quantity_total' => 1,
+        'quantity_available' => 1,
         'status' => 'disponivel',
     ])->assertInvalid(['item_type_id']);
 });
@@ -98,6 +104,8 @@ test('requires status when storing item', function () {
         'name' => 'Test Item',
         'description' => 'Test description',
         'item_type_id' => $itemType->id,
+        'quantity_total' => 1,
+        'quantity_available' => 1,
     ])->assertInvalid(['status']);
 });
 
@@ -107,6 +115,8 @@ test('validates status values', function () {
     $this->post(route('items.store'), [
         'name' => 'Test Item',
         'item_type_id' => $itemType->id,
+        'quantity_total' => 1,
+        'quantity_available' => 1,
         'status' => 'invalid_status',
     ])->assertInvalid(['status']);
 });
@@ -133,6 +143,8 @@ test('can update an item', function () {
         'name' => 'Updated Name',
         'description' => 'Updated description',
         'item_type_id' => $newItemType->id,
+        'quantity_total' => 10,
+        'quantity_available' => 8,
         'status' => 'alugado',
     ];
 
@@ -156,6 +168,8 @@ test('can update item with new image', function () {
         'description' => $item->description,
         'image' => UploadedFile::fake()->image('new-image.jpg'),
         'item_type_id' => $item->item_type_id,
+        'quantity_total' => $item->quantity_total,
+        'quantity_available' => $item->quantity_available,
         'status' => $item->status,
     ];
 
@@ -199,6 +213,8 @@ test('description can be nullable', function () {
         'name' => 'Test Item',
         'description' => null,
         'item_type_id' => $itemType->id,
+        'quantity_total' => 1,
+        'quantity_available' => 1,
         'status' => 'disponivel',
     ];
 
@@ -232,4 +248,96 @@ test('item belongs to item type', function () {
 
     expect($item->itemType)->toBeInstanceOf(ItemType::class);
     expect($item->itemType->id)->toBe($itemType->id);
+});
+
+test('requires quantity_total when storing item', function () {
+    $itemType = ItemType::factory()->create();
+
+    $this->post(route('items.store'), [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_available' => 1,
+        'status' => 'disponivel',
+    ])->assertInvalid(['quantity_total']);
+});
+
+test('requires quantity_available when storing item', function () {
+    $itemType = ItemType::factory()->create();
+
+    $this->post(route('items.store'), [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_total' => 5,
+        'status' => 'disponivel',
+    ])->assertInvalid(['quantity_available']);
+});
+
+test('validates quantity_total must be at least 1', function () {
+    $itemType = ItemType::factory()->create();
+
+    $this->post(route('items.store'), [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_total' => 0,
+        'quantity_available' => 0,
+        'status' => 'disponivel',
+    ])->assertInvalid(['quantity_total']);
+});
+
+test('validates quantity_available cannot be negative', function () {
+    $itemType = ItemType::factory()->create();
+
+    $this->post(route('items.store'), [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_total' => 5,
+        'quantity_available' => -1,
+        'status' => 'disponivel',
+    ])->assertInvalid(['quantity_available']);
+});
+
+test('validates quantity_available cannot exceed quantity_total', function () {
+    $itemType = ItemType::factory()->create();
+
+    $this->post(route('items.store'), [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_total' => 5,
+        'quantity_available' => 10,
+        'status' => 'disponivel',
+    ])->assertInvalid(['quantity_available']);
+});
+
+test('can create item with quantity_available equal to quantity_total', function () {
+    $itemType = ItemType::factory()->create();
+
+    $data = [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_total' => 5,
+        'quantity_available' => 5,
+        'status' => 'disponivel',
+    ];
+
+    $this->post(route('items.store'), $data)
+        ->assertRedirect(route('items.index'));
+
+    $this->assertDatabaseHas('items', $data);
+});
+
+test('can create item with quantity_available less than quantity_total', function () {
+    $itemType = ItemType::factory()->create();
+
+    $data = [
+        'name' => 'Test Item',
+        'item_type_id' => $itemType->id,
+        'quantity_total' => 5,
+        'quantity_available' => 3,
+        'status' => 'disponivel',
+    ];
+
+    $this->post(route('items.store'), $data)
+        ->assertRedirect(route('items.index'));
+
+    $this->assertDatabaseHas('items', $data);
 });

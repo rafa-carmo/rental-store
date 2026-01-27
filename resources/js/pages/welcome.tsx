@@ -190,7 +190,7 @@ export default function Welcome({
                             Sistema Completo de Gestão Multi-Tenant
                             <Sparkles className="h-4 w-4 animate-pulse" />
                         </div>
-                        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl leading-24">
+                        <h1 className="text-4xl leading-24 font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
                             Gerencie suas{' '}
                             <span className="relative">
                                 <span className="animate-gradient bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">

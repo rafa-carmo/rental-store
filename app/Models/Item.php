@@ -16,6 +16,8 @@ class Item extends Model
         'description',
         'image',
         'item_type_id',
+        'quantity_total',
+        'quantity_available',
         'status',
     ];
 
@@ -23,11 +25,53 @@ class Item extends Model
     {
         return [
             'status' => 'string',
+            'quantity_total' => 'integer',
+            'quantity_available' => 'integer',
         ];
     }
 
     public function itemType(): BelongsTo
     {
         return $this->belongsTo(ItemType::class);
+    }
+
+    /**
+     * Check if item has available quantity
+     */
+    public function hasAvailableQuantity(): bool
+    {
+        return $this->quantity_available > 0;
+    }
+
+    /**
+     * Decrease available quantity (rent item)
+     */
+    public function decreaseQuantity(): void
+    {
+        if ($this->quantity_available > 0) {
+            $this->quantity_available--;
+
+            if ($this->quantity_available === 0) {
+                $this->status = 'alugado';
+            }
+
+            $this->save();
+        }
+    }
+
+    /**
+     * Increase available quantity (return item)
+     */
+    public function increaseQuantity(): void
+    {
+        if ($this->quantity_available < $this->quantity_total) {
+            $this->quantity_available++;
+
+            if ($this->quantity_available > 0 && $this->status === 'alugado') {
+                $this->status = 'disponivel';
+            }
+
+            $this->save();
+        }
     }
 }

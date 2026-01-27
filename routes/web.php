@@ -24,7 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('customers', CustomerController::class)->except(['show']);
     Route::resource('admin-users', AdminUserController::class)->except(['show']);
     Route::resource('rentals', RentalController::class)->except(['show']);
-    Route::patch('rentals/{rental}/return', [RentalController::class, 'markAsReturned'])->name('rentals.return');
+    Route::patch('rentals/{rental}/return', [RentalController::class, 'markAsReturned'])->name('return.rental');
 });
 
 require __DIR__.'/settings.php';

@@ -17,27 +17,46 @@ class ItemFactory extends Factory
      */
     public function definition(): array
     {
+        $quantityTotal = fake()->numberBetween(1, 10);
+        $quantityAvailable = fake()->numberBetween(0, $quantityTotal);
+
+        $status = $quantityAvailable === 0 ? 'alugado' : 'disponivel';
+
         return [
             'name' => fake()->words(3, true),
             'description' => fake()->sentence(),
             'image' => null,
             'item_type_id' => ItemType::factory(),
-            'status' => fake()->randomElement(['disponivel', 'alugado', 'indisponivel']),
+            'quantity_total' => $quantityTotal,
+            'quantity_available' => $quantityAvailable,
+            'status' => $status,
         ];
     }
 
     public function disponivel(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'status' => 'disponivel',
-        ]);
+        return $this->state(function (array $attributes) {
+            $quantityTotal = $attributes['quantity_total'] ?? 5;
+
+            return [
+                'quantity_total' => $quantityTotal,
+                'quantity_available' => $quantityTotal,
+                'status' => 'disponivel',
+            ];
+        });
     }
 
     public function alugado(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'status' => 'alugado',
-        ]);
+        return $this->state(function (array $attributes) {
+            $quantityTotal = $attributes['quantity_total'] ?? 5;
+
+            return [
+                'quantity_total' => $quantityTotal,
+                'quantity_available' => 0,
+                'status' => 'alugado',
+            ];
+        });
     }
 
     public function indisponivel(): static

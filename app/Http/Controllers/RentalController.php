@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Item;
 use App\Models\Rental;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -34,7 +35,10 @@ class RentalController extends Controller
     public function create(): Response
     {
         $customers = Customer::query()->orderBy('name')->get();
-        $items = Item::query()->orderBy('name')->get();
+        $items = Item::query()
+            ->where('quantity_available', '>', 0)
+            ->orderBy('name')
+            ->get();
 
         return Inertia::render('Rentals/Create', [
             'customers' => $customers,
@@ -47,10 +51,27 @@ class RentalController extends Controller
      */
     public function store(StoreRentalRequest $request): RedirectResponse
     {
-        Rental::create($request->validated());
+        try {
+            DB::transaction(function () use ($request) {
+                $validated = $request->validated();
 
-        return redirect()->route('rentals.index')
-            ->with('success', 'Aluguel criado com sucesso!');
+                $item = Item::findOrFail($validated['item_id']);
+
+                if (! $item->hasAvailableQuantity()) {
+                    throw new \Exception('Item não possui quantidade disponível.');
+                }
+
+                Rental::create($validated);
+                $item->decreaseQuantity();
+            });
+
+            return redirect()->route('rentals.index')
+                ->with('success', 'Aluguel criado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['item_id' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -84,7 +105,14 @@ class RentalController extends Controller
      */
     public function destroy(Rental $rental): RedirectResponse
     {
-        $rental->delete();
+        DB::transaction(function () use ($rental) {
+            // If rental was not returned, restore item quantity
+            if ($rental->returned_at === null) {
+                $rental->item->increaseQuantity();
+            }
+
+            $rental->delete();
+        });
 
         return redirect()->route('rentals.index')
             ->with('success', 'Aluguel excluído com sucesso!');
@@ -95,7 +123,12 @@ class RentalController extends Controller
      */
     public function markAsReturned(Rental $rental): RedirectResponse
     {
-        $rental->update(['returned_at' => now()]);
+        DB::transaction(function () use ($rental) {
+            if ($rental->returned_at === null) {
+                $rental->update(['returned_at' => now()]);
+                $rental->item->increaseQuantity();
+            }
+        });
 
         return redirect()->route('rentals.index')
             ->with('success', 'Devolução registrada com sucesso!');

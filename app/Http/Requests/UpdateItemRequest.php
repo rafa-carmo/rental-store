@@ -26,6 +26,8 @@ class UpdateItemRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'max:2048'],
             'item_type_id' => ['required', 'exists:item_types,id'],
+            'quantity_total' => ['required', 'integer', 'min:1'],
+            'quantity_available' => ['required', 'integer', 'min:0', 'lte:quantity_total'],
             'status' => ['required', 'in:disponivel,alugado,indisponivel'],
         ];
     }
@@ -44,6 +46,13 @@ class UpdateItemRequest extends FormRequest
             'image.max' => 'A imagem não pode ter mais de 2MB.',
             'item_type_id.required' => 'O tipo de item é obrigatório.',
             'item_type_id.exists' => 'O tipo de item selecionado não existe.',
+            'quantity_total.required' => 'A quantidade total é obrigatória.',
+            'quantity_total.integer' => 'A quantidade total deve ser um número inteiro.',
+            'quantity_total.min' => 'A quantidade total deve ser no mínimo 1.',
+            'quantity_available.required' => 'A quantidade disponível é obrigatória.',
+            'quantity_available.integer' => 'A quantidade disponível deve ser um número inteiro.',
+            'quantity_available.min' => 'A quantidade disponível não pode ser negativa.',
+            'quantity_available.lte' => 'A quantidade disponível não pode ser maior que a quantidade total.',
             'status.required' => 'O status é obrigatório.',
             'status.in' => 'O status deve ser disponível, alugado ou indisponível.',
         ];

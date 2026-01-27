@@ -36,6 +36,8 @@ type Item = {
     description: string | null;
     image: string | null;
     item_type_id: number;
+    quantity_total: number;
+    quantity_available: number;
     status: 'disponivel' | 'alugado' | 'indisponivel';
     created_at: string;
     updated_at: string;
@@ -186,6 +188,52 @@ export default function Edit({ item, itemTypes }: Props) {
                                                 {errors.item_type_id}
                                             </p>
                                         )}
+                                    </div>
+
+                                    <div className="grid gap-4 sm:grid-cols-2">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="quantity_total">
+                                                Quantidade Total *
+                                            </Label>
+                                            <Input
+                                                id="quantity_total"
+                                                name="quantity_total"
+                                                type="number"
+                                                min="1"
+                                                defaultValue={
+                                                    item.quantity_total
+                                                }
+                                                placeholder="Quantidade total"
+                                                required
+                                            />
+                                            {errors.quantity_total && (
+                                                <p className="text-sm text-red-600 dark:text-red-400">
+                                                    {errors.quantity_total}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <Label htmlFor="quantity_available">
+                                                Quantidade Disponível *
+                                            </Label>
+                                            <Input
+                                                id="quantity_available"
+                                                name="quantity_available"
+                                                type="number"
+                                                min="0"
+                                                defaultValue={
+                                                    item.quantity_available
+                                                }
+                                                placeholder="Quantidade disponível"
+                                                required
+                                            />
+                                            {errors.quantity_available && (
+                                                <p className="text-sm text-red-600 dark:text-red-400">
+                                                    {errors.quantity_available}
+                                                </p>
+                                            )}
+                                        </div>
                                     </div>
 
                                     <div className="space-y-2">
