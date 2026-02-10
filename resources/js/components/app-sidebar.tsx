@@ -1,4 +1,5 @@
 import { index as adminUsersIndex } from '@/actions/App/Http/Controllers/AdminUserController';
+import { index as companiesIndex } from '@/actions/App/Http/Controllers/CompanyController';
 import { index as customersIndex } from '@/actions/App/Http/Controllers/CustomerController';
 import { index as itemsIndex } from '@/actions/App/Http/Controllers/ItemController';
 import { index as itemTypesIndex } from '@/actions/App/Http/Controllers/ItemTypeController';
@@ -21,6 +22,7 @@ import { Link } from '@inertiajs/react';
 import {
     BookOpen,
     Box,
+    Building2,
     FileText,
     Folder,
     LayoutGrid,
@@ -50,6 +52,11 @@ const mainNavItems: NavItem[] = [
         title: 'Clientes',
         href: customersIndex(),
         icon: Users,
+    },
+    {
+        title: 'Empresas',
+        href: companiesIndex(),
+        icon: Building2,
     },
     {
         title: 'Aluguéis',
