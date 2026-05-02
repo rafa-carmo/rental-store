@@ -1,3 +1,14 @@
+import { Link } from '@inertiajs/react';
+import {
+    Box,
+    Building2,
+    FileText,
+    Folder,
+    LayoutGrid,
+    Package,
+    UserCog,
+    Users,
+} from 'lucide-react';
 import { index as adminUsersIndex } from '@/actions/App/Http/Controllers/AdminUserController';
 import { index as companiesIndex } from '@/actions/App/Http/Controllers/CompanyController';
 import { index as customersIndex } from '@/actions/App/Http/Controllers/CustomerController';
@@ -18,18 +29,6 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import {
-    BookOpen,
-    Box,
-    Building2,
-    FileText,
-    Folder,
-    LayoutGrid,
-    Package,
-    UserCog,
-    Users,
-} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -73,14 +72,9 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
+        href: 'https://github.com/rafa-carmo/rental-store',
         icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
+    }
 ];
 
 export function AppSidebar() {

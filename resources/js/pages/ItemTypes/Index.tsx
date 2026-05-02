@@ -1,3 +1,5 @@
+import { Head, Link, router } from '@inertiajs/react';
+import { Edit, Plus, Trash2 } from 'lucide-react';
 import {
     create,
     destroy,
@@ -22,8 +24,6 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import { Head, Link, router } from '@inertiajs/react';
-import { Edit, Plus, Trash2 } from 'lucide-react';
 
 type ItemType = {
     id: number;

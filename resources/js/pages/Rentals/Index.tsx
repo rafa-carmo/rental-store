@@ -15,10 +15,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
-import returnMethod from '@/routes/return';
-import type { BreadcrumbItem } from '@/types';
 import {
     Table,
     TableBody,
@@ -27,6 +23,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import AppLayout from '@/layouts/app-layout';
+import { dashboard } from '@/routes';
+import returnMethod from '@/routes/return';
+import type { BreadcrumbItem } from '@/types';
 
 type Rental = {
     id: number;
@@ -81,10 +81,6 @@ export default function Index({ rentals }: Props) {
             style: 'currency',
             currency: 'BRL',
         }).format(parseFloat(value));
-    };
-
-    const formatDate = (date: string) => {
-        return new Date(date + 'T00:00:00').toLocaleDateString('pt-BR');
     };
 
     const formatDateTime = (date: string) => {
@@ -148,10 +144,14 @@ export default function Index({ rentals }: Props) {
                                                 {formatCurrency(rental.value)}
                                             </TableCell>
                                             <TableCell>
-                                                {formatDateTime(rental.pickup_date)}
+                                                {formatDateTime(
+                                                    rental.pickup_date,
+                                                )}
                                             </TableCell>
                                             <TableCell>
-                                                {formatDateTime(rental.return_date)}
+                                                {formatDateTime(
+                                                    rental.return_date,
+                                                )}
                                             </TableCell>
                                             <TableCell>
                                                 {rental.returned_at ? (

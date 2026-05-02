@@ -1,12 +1,3 @@
-import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
-import { dashboard, login, register } from '@/routes';
-import type { SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import {
     ArrowRight,
@@ -23,6 +14,15 @@ import {
     Zap,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { dashboard, login, register } from '@/routes';
+import type { SharedData } from '@/types';
 
 export default function Welcome({
     canRegister = true,
@@ -31,24 +31,23 @@ export default function Welcome({
 }) {
     const { auth } = usePage<SharedData>().props;
     const [isVisible, setIsVisible] = useState(false);
-    const [count1, setCount1] = useState(0);
+
     const [count2, setCount2] = useState(0);
     const [count3, setCount3] = useState(0);
 
     useEffect(() => {
         setIsVisible(true);
 
+
         // Animated counters
         const duration = 2000;
         const steps = 60;
-        const increment1 = 99 / steps;
         const increment2 = 24 / steps;
         const increment3 = 100 / steps;
 
         let currentStep = 0;
         const timer = setInterval(() => {
             currentStep++;
-            setCount1(Math.min(Math.round(increment1 * currentStep), 99));
             setCount2(Math.min(Math.round(increment2 * currentStep), 24));
             setCount3(Math.min(Math.round(increment3 * currentStep), 100));
 
